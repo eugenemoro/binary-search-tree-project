@@ -35,7 +35,7 @@ tree.rebalance();
 prettyPrint(tree.root);
 console.log(`isBalanced: ${tree.isBalanced()}`);
 
-tree.levelOrderRecursive(el => console.log(el.value));
+tree.levelOrderIterative(el => console.log(el.value));
 tree.preOrder(el => console.log(el.value));
 tree.postOrder(el => console.log(el.value));
 tree.inOrder(el => console.log(el.value));

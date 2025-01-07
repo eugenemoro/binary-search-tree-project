@@ -19,6 +19,7 @@ export class BinarySearchTree {
   }
 
   insert(value, node = this.root) {
+    if (value == null) throw new Error('Value cannot be null or undefined.');
     if (value < node.value) {
       if (!node.left) {
         node.left = new Node(value);
@@ -35,6 +36,7 @@ export class BinarySearchTree {
   }
 
   deleteItem(value, node = this.root) {
+    if (value == null) throw new Error('Value cannot be null or undefined.');
     if (!node) return null;
     if (value < node.value) {
       node.left = this.deleteItem(value, node.left);
@@ -80,9 +82,9 @@ export class BinarySearchTree {
       let queue = [];
       while (node) {
         callback(node);
-        if (node.left) queue.unshift(node.left);
-        if (node.right) queue.unshift(node.right);
-        node = queue.pop();
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+        node = queue.shift();
       }
     } else {
       throw 'Callback is required';
@@ -92,9 +94,9 @@ export class BinarySearchTree {
   levelOrderRecursive(callback, queue = new Array(this.root)) {
     if (callback instanceof Function) {
       if (queue.length === 0) return;
-      const node = queue.pop();
-      if (node.left) queue.unshift(node.left);
-      if (node.right) queue.unshift(node.right);
+      const node = queue.shift();
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
       callback(node);
       this.levelOrderRecursive(callback, queue);
     } else {
